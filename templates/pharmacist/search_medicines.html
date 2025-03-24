@@ -1,0 +1,101 @@
+{% extends "pharmacist/base.html" %}
+{% block content %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 20px;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    h2 {
+        color: #343a40;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+        width: 70%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    button {
+        padding: 10px 15px;
+        margin-left: 10px;
+        background-color: #343a40;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #495057;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        background: #ffffff;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .price {
+        font-weight: bold;
+        color: #28a745;
+    }
+
+    .no-results {
+        font-size: 16px;
+        color: #dc3545;
+    }
+</style>
+
+<div class="container">
+    <h2>Search Medicines</h2>
+    <form method="GET">
+        <input type="text" name="query" value="{{ query }}" placeholder="Search Medicines">
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for medicine in medicines %}
+            <li>
+                <span>{{ medicine.name }}</span> 
+                <span class="price">${{ medicine.price }}</span>
+            </li>
+        {% empty %}
+            <li class="no-results">No medicines found.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

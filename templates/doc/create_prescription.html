@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .prescription-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .prescription-container h2 {
+        color: #343a40;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .prescription-form label {
+        display: block;
+        margin-bottom: 5px;
+        color: #495057;
+    }
+
+    .prescription-form input[type="text"],
+    .prescription-form select,
+    .prescription-form textarea {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .medicine-form {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .medicine-form select,
+    .medicine-form input[type="text"] {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    #add-medicine,
+    button[type="submit"] {
+        padding: 12px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 15px;
+    }
+
+    #add-medicine:hover,
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    #medicines {
+        margin-bottom: 20px;
+    }
+
+    .medicine-form:last-child {
+        margin-bottom: 0;
+    }
+</style>
+
+<div class="prescription-container">
+    <h2>Create Prescription</h2>
+    <form method="post" class="prescription-form">
+        {% csrf_token %}
+        {{ prescription_form.as_p }}
+        <h3>Medicines</h3>
+        <div id="medicines">
+            <div class="medicine-form">
+                <select name="medicine_1">
+                    {% for medicine in medicines %}
+                        <option value="{{ medicine.id }}">{{ medicine.name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="text" name="dosage_1" placeholder="Dosage">
+                <input type="text" name="duration_1" placeholder="Duration">
+            </div>
+        </div>
+        <button type="button" id="add-medicine">Add Another Medicine</button>
+        <button type="submit">Submit Prescription</button>
+    </form>
+</div>
+
+<script>
+    let medicineCount = 1;
+    document.getElementById('add-medicine').addEventListener('click', function() {
+        medicineCount++;
+        const newMedicineForm = `
+            <div class="medicine-form">
+                <select name="medicine_${medicineCount}">
+                    {% for medicine in medicines %}
+                        <option value="{{ medicine.id }}">{{ medicine.name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="text" name="dosage_${medicineCount}" placeholder="Dosage">
+                <input type="text" name="duration_${medicineCount}" placeholder="Duration">
+            </div>
+        `;
+        document.getElementById('medicines').insertAdjacentHTML('beforeend', newMedicineForm);
+    });
+</script>
+{% endblock %}

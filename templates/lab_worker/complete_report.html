@@ -1,0 +1,24 @@
+{% extends 'lab_worker/base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Complete Test Report</h2>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ test_request.test.name }}</h5>
+            <p class="card-text">
+                <strong>Patient:</strong> {{ test_request.patient.admin.first_name }}<br>
+                <strong>Notes:</strong> {{ test_request.doctor_notes }}
+            </p>
+        </div>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Test Results</label>
+            <textarea name="report_data" class="form-control" rows="10" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Submit Report</button>
+    </form>
+</div>
+{% endblock %}

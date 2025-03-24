@@ -1,0 +1,79 @@
+{% extends "pharmacist/base.html" %}
+{% block content %}
+<style>
+    .prescription-details-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .prescription-details-container h2 {
+        color: #343a40;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .prescription-details-container p {
+        margin-bottom: 10px;
+        color: #495057;
+    }
+
+    .prescription-details-container strong {
+        font-weight: bold;
+    }
+
+    .prescription-details-container table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .prescription-details-container th,
+    .prescription-details-container td {
+        border: 1px solid #ced4da;
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    .prescription-details-container thead {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .prescription-details-container tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<div class="prescription-details-container">
+    <h2>Prescription Details</h2>
+    <p><strong>Patient:</strong> {{ prescription.patient.admin.first_name }}</p>
+    <p><strong>Doctor:</strong> {{ prescription.doctor.admin.first_name }}</p>
+    <p><strong>Appointment Date:</strong> {{ prescription.appointment.date_of_appointment }}</p>
+    <p><strong>Additional Notes:</strong> {{ prescription.additional_notes }}</p>
+
+    <h3>Medicines</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Medicine</th>
+                <th>Dosage</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pm in prescription_medicines %}
+                <tr>
+                    <td>{{ pm.medicine.name }}</td>
+                    <td>{{ pm.dosage }}</td>
+                    <td>{{ pm.duration }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

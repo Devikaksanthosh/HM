@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+   <!-- Mirrored from preschool.dreamguystech.com/html-template/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Oct 2021 11:11:39 GMT -->
+   <head>
+     
+      <title>HMS - Predict</title>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
+      <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css'%}">
+      <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css'%}">
+      <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css'%}">
+      <link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
+
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .container {
+            max-width: 700px;
+            margin-top: 50px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box; /* Important for padding/border to be included in the width */
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        h3 {
+            margin-top: 30px;
+            color: #28a745; /* Green color */
+            text-align: center;
+        }
+
+        .result-good {
+            color: #28a745;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .result-risk {
+            color: #dc3545;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+            width: 200px; /* Adjust width as needed */
+            text-align: center;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        
+        .btn-block {
+            width: 100%;
+            max-width: 250px; /* Controls button size */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🧠 Mental Health Prediction System</h2>
+        <form method="POST" id="predictionForm">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" id="age" name="age" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select class="form-control" id="gender" name="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="sleep_quality">Sleep Quality (1-10):</label>
+                <input type="number" class="form-control" id="sleep_quality" name="sleep_quality" min="1" max="10" required>
+            </div>
+
+            <div class="form-group">
+                <label for="physical_activity">Physical Activity (hours/week):</label>
+                <input type="number" class="form-control" id="physical_activity" name="physical_activity" min="0" max="10" step="0.1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="social_media_use">Social Media Use (hours/day):</label>
+                <input type="number" class="form-control" id="social_media_use" name="social_media_use" min="0" max="10" step="0.1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="work_stress">Work Stress Level (1-5):</label>
+                <input type="number" class="form-control" id="work_stress" name="work_stress" min="1" max="5" required>
+            </div>
+
+            <div class="form-group">
+                <label for="financial_stress">Financial Stress Level (1-5):</label>
+                <input type="number" class="form-control" id="financial_stress" name="financial_stress" min="1" max="5" required>
+            </div>
+
+            <div class="form-group">
+                <label for="anxiety_level">Anxiety Level (1-10):</label>
+                <input type="number" class="form-control" id="anxiety_level" name="anxiety_level" min="1" max="10" required>
+            </div>
+
+            <div class="form-group">
+                <label for="depression_score">Depression Score (1-10):</label>
+                <input type="number" class="form-control" id="depression_score" name="depression_score" min="1" max="10" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Predict Mental Health</button>
+        </form>
+
+        {% if result %}
+            <h3 class="mt-4">Prediction Result:</h3>
+            {% if result == "Good" %}
+                <p class="result-good">✅ Your mental health is <b>Good</b>! Keep maintaining a healthy lifestyle. <span class="emoji">😊</span></p>
+            {% else %}
+                <p class="result-risk">⚠️ Your mental health may be at <b>Risk</b>. Consider seeking help or making lifestyle changes. <span class="emoji">💙</span></p>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="btn-container">
+        <a href="{% url 'index' %}" class="btn btn-primary btn-block">Home Page</a>
+    </div>
+    
+
+    <!-- Bootstrap and jQuery JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Example:  Prevent form submission if any input is invalid (optional)
+            $("#predictionForm").submit(function(event) {
+                if (!this.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                $(this).addClass('was-validated');  // Add the Bootstrap validation styling
+            });
+        });
+    </script>
+</body>
+</html>

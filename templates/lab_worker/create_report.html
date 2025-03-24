@@ -1,0 +1,85 @@
+{% extends "lab_worker/base.html" %}
+{% block content %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 20px;
+    }
+
+    .container {
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    h2 {
+        color: #343a40;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    textarea {
+        height: 100px;
+        resize: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        background-color: #343a40;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #495057;
+    }
+</style>
+
+<div class="container">
+    <h2>Create Patient Report</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Patient Name:</label> 
+        <input type="text" name="patient_name" required><br>
+
+        <label>Test:</label>
+        <select name="test_id" required>
+            <option value="" disabled selected>Select a Test</option>
+            {% for test in tests %}
+                <option value="{{ test.id }}">{{ test.name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label>Report Data:</label> 
+        <textarea name="report_data" required></textarea><br>
+
+        <button type="submit">Create Report</button>
+    </form>
+</div>
+
+{% endblock %}

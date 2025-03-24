@@ -1,0 +1,75 @@
+{% extends "pharmacist/base.html" %}
+{% block content %}
+<style>
+    .prescriptions-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .prescriptions-container h2 {
+        color: #343a40;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .prescriptions-container table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .prescriptions-container th,
+    .prescriptions-container td {
+        border: 1px solid #ced4da;
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    .prescriptions-container thead {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .prescriptions-container tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .prescriptions-container a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .prescriptions-container a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="prescriptions-container">
+    <h2>Prescriptions</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Appointment Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prescription in prescriptions %}
+                <tr>
+                    <td>{{ prescription.patient.admin.first_name }}</td>
+                    <td>{{ prescription.doctor.admin.first_name }}</td>
+                    <td>{{ prescription.appointment.date_of_appointment }}</td>
+                    <td><a href="{% url 'prescription_detail' prescription.id %}">View Details</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

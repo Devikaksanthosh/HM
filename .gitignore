@@ -1,0 +1,30 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django-specific files
+db.sqlite3
+*.log
+
+# Ignore environment variables and settings
+.env
+config/settings/local.py
+
+
+# Ignore compiled and IDE-specific files
+*.swp
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore migrations if necessary (but usually it's good to track them)
+# Uncomment if you want to ignore migrations
+# **/migrations/
+
+# Ignore MacOS system files
+.DS_Store

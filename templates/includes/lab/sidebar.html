@@ -1,0 +1,20 @@
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+       <div id="sidebar-menu" class="sidebar-menu">
+          <ul>
+             <li class="menu-title">
+                <span>Lab Worker Menu</span>
+             </li>
+             <li>
+               <a href="{% url 'lab_worker_dashboard' %}"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            </li>
+             <li>
+               <a href="{% url 'create_test' %}"><i class="fas fa-plus"></i> <span>Add Test</span></a>
+            </li>
+            <li>
+               <a href="{% url 'lab_test_requests' %}"><i class="fas fa-file"></i> <span>Test Requests</span></a>
+            </li>
+          </ul>
+       </div>
+    </div>
+</div>
