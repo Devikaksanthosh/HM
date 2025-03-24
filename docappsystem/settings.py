@@ -97,14 +97,28 @@ WSGI_APPLICATION = 'docappsystem.wsgi.application'
         
 #     }
 # }
-import dj_database_url 
+
+import os
+import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', 'postgres://USER:PASSWORD@HOST:PORT/DB_NAME'),
-        conn_max_age=600,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hms_db_uot4',
+        'USER': 'hms_db_uot4_user',
+        'PASSWORD': 'CjM0jVeO3w33Y3uSGk7GuxF3e7uOwxYN',  # Replace this
+        'HOST': 'dpg-cvgsdbtrie7s73ehqq0g-a',
+        'PORT': '5432',
+    }
 }
+
+# Use dj_database_url to parse DATABASE_URL from Render
+DATABASE_URL = os.getenv('DATABASE_URL')
+
+if DATABASE_URL:
+    DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
