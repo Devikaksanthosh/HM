@@ -29,7 +29,7 @@ STRIPE_SECRET_KEY = 'sk_test_51R5mJR05KOaxxjfDFwwgU67DoagaGFbjzMAGCCIU3lDV1HErqv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
