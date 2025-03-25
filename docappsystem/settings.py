@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'docappsystem.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -101,22 +101,8 @@ WSGI_APPLICATION = 'docappsystem.wsgi.application'
 import os
 import dj_database_url
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hms_db_uot4',
-        'USER': 'hms_db_uot4_user',
-        'PASSWORD': 'CjM0jVeO3w33Y3uSGk7GuxF3e7uOwxYN',  # Replace this
-        'HOST': 'dpg-cvgsdbtrie7s73ehqq0g-a',
-        'PORT': '5432',
-    }
-}
 
-# Use dj_database_url to parse DATABASE_URL from Render
-DATABASE_URL = os.getenv('DATABASE_URL')
-
-if DATABASE_URL:
-    DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+DATABASES['default'] = dj_database_url.parse("postgresql://hms_db_uot4_user:CjM0jVeO3w33Y3uSGk7GuxF3e7uOwxYN@dpg-cvgsdbtrie7s73ehqq0g-a.oregon-postgres.render.com/hms_db_uot4")
 
 
 
